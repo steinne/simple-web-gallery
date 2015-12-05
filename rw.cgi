@@ -24,6 +24,14 @@ my $login_error = "";
 my $enter_check = "no";
 
 my %users = (
+	leah => 'seePics',
+	melinda => 'seePics',
+	judy => 'seePics',
+	patricia => 'seePics',
+	joanna => 'seePics',
+	barbara => 'seePics',
+	gerylyn => 'seePics',
+	marybeth => 'seePics',
 	kristine => 'stein',
 	session_id => 'JhTTTgsNfdiKJSojaSDnsjdjYhsdbnqw67'
 );
@@ -92,7 +100,7 @@ print "nothing to see";
 
 sub show_galleries(){
 print "Content-type: text/html\n\n";
-print "<html><head><title>RememberWhen</title>";
+print "<html><head><title>RememberWhen</title><meta name='viewport' content='width=device-width, initial-scale=.5' />";
 print "
 <style>
 .loader {
@@ -218,6 +226,7 @@ print "<br<br><hr><br><br></body></html>\n";
 sub show_album{
    print "Content-type: text/html\n\n";
    print "<html><head><title>RememberWhen</title>
+   <meta name='viewport' content='width=device-width, initial-scale=.5' />
 <style>
 div.img img {
     display: inline;
@@ -314,6 +323,7 @@ sub show_image{
    my $count = @files;
    print "Content-type: text/html\n\n";
    print "<html><head><title>RememberWhen</title>
+   <meta name='viewport' content='width=device-width, initial-scale=.5'>
 	<style>
 	.loader {
         position: fixed;
@@ -365,11 +375,11 @@ h1 span{
    print  "<a class='mybutton' href='$ENV{SCRIPT_NAME}?album=$FORM{'album'}' style='cursor:pointer;' title='show current album'>Back to $FORM{album}</a>";
    my $prev = $FORM{'image'} -  1;
    $prev = 0 if ($prev < 1 );
-   print  "<center><a class='mybutton' href='$ENV{SCRIPT_NAME}?album=$FORM{'album'}&image=$prev'><< Previous</a>";
+   print  "<center><a class='mybutton' href='$ENV{SCRIPT_NAME}?album=$FORM{'album'}&image=$prev'> << </a>";
    print  "&nbsp&nbsp";
    my $next = $FORM{'image'} + 1;
    $next = 0 if ($next > $count);
-   print  "<a class='mybutton' href='$ENV{SCRIPT_NAME}?album=$FORM{'album'}&image=$next'>&nbsp&nbspNext >>&nbsp&nbsp</a>\n<br></center>";
+   print  "<a class='mybutton' href='$ENV{SCRIPT_NAME}?album=$FORM{'album'}&image=$next'> >> </a>\n<br></center>";
    print "<center><div class='img'><img src='$ENV{SCRIPT_NAME}?display=1&album=$FORM{'album'}&image=$FORM{'image'}&type=1'></div></center> ";
    print "</center><br><br><br>";
 print "<script>
@@ -498,6 +508,7 @@ print "
 <html >
   <head>
     <title>Remember When</title>
+    <meta name='viewport' content='width=device-width, initial-scale=.5' />
         <style>
 body{
 	margin: 0;
@@ -508,38 +519,10 @@ body{
 	font-size: 12px;
 }
 
-.body{
-	position: absolute;
-	top: -20px;
-	left: -20px;
-	right: -40px;
-	bottom: -40px;
-	width: auto;
-	height: auto;
-        //background-image: url(images/login.jpg);
-	//background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg);
-	background-size: cover;
-	-webkit-filter: blur(5px);
-	z-index: 0;
-}
-
-.grad{
-	position: absolute;
-	top: -20px;
-	left: -20px;
-	right: -40px;
-	bottom: -40px;
-	width: auto;
-	height: auto;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
-	z-index: 1;
-	opacity: 0.3;
-}
-
 .header{
 	position: absolute;
-	top: calc(50% - 35px);
-	left: calc(50% - 305px);
+	top: calc(29% - 55px);
+	left: calc(40% - 48px);
 	z-index: 2;
 }
 
@@ -557,8 +540,8 @@ body{
 
 .login{
 	position: absolute;
-	top: calc(50% - 75px);
-	left: calc(50% - 50px);
+	top: calc(40% - 75px);
+	left: calc(40% - 50px);
 	height: 150px;
 	width: 350px;
 	padding: 10px;
@@ -649,11 +632,11 @@ body{
 }
 
 ::-webkit-input-placeholder{
-   color: rgba(209,225,207,0.6);
+   color: #567DF0;
 }
 
 ::-moz-input-placeholder{
-   color: rgba(209,225,207,0.6);
+   color: #567DF0;
 }
     </style>
 
@@ -681,7 +664,8 @@ function myFunction() {
 		 $action = $ENV{SCRIPT_NAME};
 	}else { $action = $ENV{REQUEST_URI};}
 	print "	<form action=$action method='post' >
-		<input type='text' placeholder='username' name='user' id='name'><br>
+		<input type='text' placeholder='username' name='user' id='name' autocapitalize='off'
+                autocorrect='off'><br>
 		<input type='password' placeholder='password' name='password'><br>
 		<input type='submit'  value='Login'>
 		<!-- input type='submit' onclick='myFunction()' value='Login' -->
